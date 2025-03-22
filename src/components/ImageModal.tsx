@@ -1,7 +1,5 @@
-"use client";
-
 import { useState, useEffect } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "./Icons";
+import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from "./Icons";
 
 interface ImageModalProps {
 	images: string[];
@@ -18,14 +16,12 @@ const ImageModal = ({
 }: ImageModalProps) => {
 	const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
-	// Reset current index when modal opens with new images
 	useEffect(() => {
 		if (isOpen) {
 			setCurrentIndex(initialIndex);
 		}
 	}, [isOpen, initialIndex]);
 
-	// Handle keyboard navigation
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			if (!isOpen) return;
@@ -41,7 +37,6 @@ const ImageModal = ({
 
 		window.addEventListener("keydown", handleKeyDown);
 
-		// Disable body scroll when modal is open
 		if (isOpen) {
 			document.documentElement.classList.add("no-scroll");
 		} else {
@@ -75,37 +70,24 @@ const ImageModal = ({
 			<div
 				className='relative w-full h-full flex items-center justify-center'
 				onClick={(e) => e.stopPropagation()}>
-				{/* Close button */}
 				<button
 					className='absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full cursor-pointer backdrop-blur'
 					onClick={onClose}>
-					<svg
-						width='24'
-						height='24'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						strokeWidth='2'>
-						<line x1='18' y1='6' x2='6' y2='18'></line>
-						<line x1='6' y1='6' x2='18' y2='18'></line>
-					</svg>
+					<CloseIcon />
 				</button>
 
-				{/* Image counter */}
 				<div className='absolute top-4 left-4 text-white py-3 px-6 rounded-full text-sm bg-white/10 hover:bg-white/20 backdrop-blur'>
 					{currentIndex + 1} / {images.length}
 				</div>
 
-				{/* Main image */}
 				<div className='w-full h-full flex items-center justify-center p-4 md:p-10'>
 					<img
-						src={images[currentIndex] || "/placeholder.svg"}
+						src={images[currentIndex]}
 						alt={`Image ${currentIndex + 1}`}
 						className='max-w-full max-h-full object-contain rounded-[20px]'
 					/>
 				</div>
 
-				{/* Navigation buttons */}
 				{images.length > 1 && (
 					<>
 						<button

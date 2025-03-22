@@ -1,10 +1,15 @@
-"use client";
-
 import type React from "react";
 
 import { useState } from "react";
 import type { ProjectData } from "../utils/apiAdapter";
-import { BathIcon, BedIcon, HeartIcon, MapPinIcon, SquareIcon } from "./Icons";
+import {
+	BathIcon,
+	BedIcon,
+	CameraIcon,
+	HeartIcon,
+	MapPinIcon,
+	SquareIcon,
+} from "./Icons";
 import ImageModal from "./ImageModal";
 
 interface ProjectCardProps {
@@ -15,11 +20,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	// Get the first image or use a placeholder
 	const firstImage =
-		project.images && project.images.length > 0
-			? project.images[0]
-			: "/placeholder.svg?height=400&width=600";
+		project.images && project.images.length > 0 ? project.images[0] : '';
 
 	const toggleFavorite = (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -38,30 +40,33 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 				<div
 					className='relative h-64 overflow-hidden cursor-pointer'
 					onClick={openImageModal}>
-					{/* Status Badge */}
 					<div className='absolute top-4 left-4 z-10'>
 						<div className='bg-teal-600 text-white px-4 py-2 rounded-full font-medium uppercase tracking-wider'>
 							{project.status}
 						</div>
 					</div>
 
-					{/* Favorite Button */}
 					<button
 						className='absolute top-4 right-4 z-10 bg-white p-2 rounded-full shadow-md cursor-pointer'
 						onClick={toggleFavorite}>
 						<HeartIcon filled={isFavorite} />
 					</button>
 
-					{/* Main Image */}
 					<img
-						src={firstImage || "/placeholder.svg"}
+						src={firstImage}
 						alt={project.title}
 						className='w-full h-full object-cover'
 					/>
+
+					{project.images && project.images.length > 1 && (
+						<div className='absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm flex items-center'>
+							<CameraIcon />
+							<span className='ml-1'>{project.images.length} Photos</span>
+						</div>
+					)}
 				</div>
 
 				<div className='p-4 flex flex-col flex-grow'>
-					{/* Title and Price */}
 					<div className='flex justify-between gap-4 items-start min-h-[50px] mb-2'>
 						<h3 className='text-xl font-bold'>{project.title}</h3>
 						<p className='text-xl font-bold text-orange-500'>
@@ -69,13 +74,11 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 						</p>
 					</div>
 
-					{/* Location */}
 					<div className='flex items-center text-gray-600 mb-4 min-h-[24px]'>
 						<MapPinIcon />
 						<span className='ml-1 truncate w-full'>{project.address}</span>
 					</div>
 
-					{/* Features - Beds, Baths, Area */}
 					<div className='flex justify-between border-t border-gray-200 pt-4 mt-auto'>
 						<div className='flex items-center text-gray-600'>
 							<BedIcon />
@@ -95,7 +98,6 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 				</div>
 			</div>
 
-			{/* Image Modal */}
 			<ImageModal
 				images={project.images}
 				initialIndex={0}

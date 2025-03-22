@@ -1,5 +1,4 @@
-// This adapter transforms the API response to match our component structure
-export interface ApiProject {
+export interface ApiProjectData {
   _id: string
   generalInfo: {
     name: string
@@ -37,31 +36,31 @@ export interface ProjectData {
   images: string[]
 }
 
-interface adaptApiResponseArray {
+interface AdaptApiResponse {
   currentPage: number;
-  projects: ApiProject[];
+  projects: ApiProjectData[];
   totalObjects: number;
   totalPages: number;
 }
 
-export function adaptApiResponse(apiProject: ApiProject): ProjectData {
+export function adaptApiResponse(apiProjectData:ApiProjectData): ProjectData {
   // Extract and transform data from the API response
   return {
-    id: apiProject._id || String(Math.random()),
-    title: apiProject.generalInfo.name || "Untitled Project",
-    price: apiProject.generalInfo.price || 0,
-    address: apiProject.generalInfo.province || "No address provided",
-    bedrooms: Number.parseInt(apiProject.generalInfo.rooms) || 0,
-    bathrooms: apiProject.generalInfo.bathrooms || 0,
-    area: apiProject.generalInfo.size || 0,
-    status: apiProject.generalInfo.type || "NEW BUILDING",
+    id: apiProjectData._id || String(Math.random()),
+    title: apiProjectData.generalInfo.name || "Untitled Project",
+    price: apiProjectData.generalInfo.price || 0,
+    address: apiProjectData.generalInfo.province || "No address provided",
+    bedrooms: Number.parseInt(apiProjectData.generalInfo.rooms) || 0,
+    bathrooms: apiProjectData.generalInfo.bathrooms || 0,
+    area: apiProjectData.generalInfo.size || 0,
+    status: apiProjectData.generalInfo.type || "NEW BUILDING",
     // Extract medium-sized images from the images array
-    images: apiProject.images.map((img) => img.medium),
+    images: apiProjectData.images.map((img) => img.medium),
   }
 }
 
 // Function to handle the entire API response
-export const adaptApiResponseArray = (apiResponse: adaptApiResponseArray) => {
+export const adaptApiResponseArray = (apiResponse: AdaptApiResponse) => {
   // Check if the response has the expected structure
   if (!apiResponse || !Array.isArray(apiResponse.projects)) {
     return {
@@ -72,7 +71,7 @@ export const adaptApiResponseArray = (apiResponse: adaptApiResponseArray) => {
   }
 
   // Transform each project in the array
-  const adaptedProjects = apiResponse.projects.map((project: ApiProject) => adaptApiResponse(project))
+  const adaptedProjects = apiResponse.projects.map((project: ApiProjectData) => adaptApiResponse(project))
 
   return {
     projects: adaptedProjects,

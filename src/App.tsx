@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import ProjectGrid from "./components/ProjectGrid";
 import Pagination from "./components/Pagination";
@@ -13,7 +11,7 @@ function App() {
 	const [error, setError] = useState<string | null>(null);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
-	const pageSize = 9; // 3 cards per row, 3 rows
+	const pageSize = 9;
 
 	useEffect(() => {
 		const fetchProjects = async () => {
@@ -38,7 +36,6 @@ function App() {
 
 				const data = await response.json();
 
-				// Use the adapter to transform the API response
 				const adaptedData = adaptApiResponseArray(data);
 
 				setProjects(adaptedData.projects);
@@ -58,7 +55,6 @@ function App() {
 
 	const handlePageChange = (newPage: number) => {
 		setCurrentPage(newPage);
-		// Scroll to top when changing pages
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
