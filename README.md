@@ -2,6 +2,10 @@
 
 A responsive grid for displaying real estate project cards with custom pagination and image slider.
 
+## Snapshot
+![image](https://github.com/user-attachments/assets/d2923f9a-28cd-4ded-9797-41dbc2b4820b)
+
+
 ## Features
 
 - **Responsive Design**: Grid layout adapts to different screen sizes (mobile, tablet, desktop)
