@@ -1,54 +1,74 @@
-# React + TypeScript + Vite
+# Real Estate Projects Grid
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive grid for displaying real estate project cards with custom pagination and image slider.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Responsive Design**: Grid layout adapts to different screen sizes (mobile, tablet, desktop)
+- **Custom Pagination**: Implemented manually using React state (no external libraries)
+- **Image Slider**: Custom implementation with navigation controls that appear on hover
+- **API Integration**: Data fetched from the provided API endpoint
+- **Error Handling**: Proper handling of API errors and loading states
+- **No External Libraries**: Built using only React and Tailwind CSS
 
-## Expanding the ESLint configuration
+## Implementation Details
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Components
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. **App**: Main component that handles API calls, pagination state, and error handling
+2. **ProjectGrid**: Displays the grid of project cards
+3. **ProjectCard**: Individual card component with image slider functionality
+4. **Pagination**: Custom pagination component with dynamic page number display
+5. **ErrorMessage**: Displays error messages
+6. **LoadingSpinner**: Shows loading state
+7. **Icons**: SVG icons used throughout the application
+
+### Technical Highlights
+
+- **Custom Image Slider**: Implemented with useState and onClick events
+- **Responsive Grid**: Uses Tailwind CSS grid classes for different screen sizes
+- **Error Handling**: Comprehensive error handling for API requests
+- **Pagination Logic**: Smart pagination that adapts to the total number of pages
+
+## How to run locally 💻
+
+Follow these steps to run GridSnap on your local machine.
+
+### Clone this repository
+
+```bash
+git clone https://github.com/Pappyjay23/GridSnap.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Navigate to the directory
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+cd GridSnap
 ```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run
+
+Run the development server to view the app.
+
+```bash
+npm run dev
+```
+
+Now, you can navigate to http://localhost:5173/ to view the app.
+
+### Build
+
+```bash
+npm run build
+```
+
+## Credits ✍
+
+Implementation by [@Pappyjay23](https://github.com/Pappyjay23)
+
