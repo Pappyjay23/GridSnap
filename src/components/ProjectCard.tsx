@@ -1,7 +1,7 @@
-import type React from "react";
+import React from "react";
 
 import { useState } from "react";
-import type { ProjectData } from "../utils/apiAdapter";
+import { ProjectData } from "../utils/apiAdapter";
 import {
 	BathIcon,
 	BedIcon,
@@ -21,7 +21,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const firstImage =
-		project.images && project.images.length > 0 ? project.images[0] : '';
+		project.images && project.images.length > 0 ? project.images[0] : "";
 
 	const toggleFavorite = (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -36,7 +36,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
 	return (
 		<>
-			<div className='flex flex-col h-full bg-white rounded-3xl overflow-hidden text-gray-900 transition-transform hover:scale-[1.02] cursor-pointer transition-all duration-500 ease-in-out'>
+			<div className='flex flex-col h-full bg-white rounded-3xl overflow-hidden text-gray-900 hover:scale-[1.02] cursor-pointer transition-all duration-500 ease-in-out'>
 				<div
 					className='relative h-64 overflow-hidden cursor-pointer'
 					onClick={openImageModal}>
