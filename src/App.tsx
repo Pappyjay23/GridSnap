@@ -3,7 +3,7 @@ import ProjectGrid from "./components/ProjectGrid";
 import Pagination from "./components/Pagination";
 import ErrorMessage from "./components/ErrorMessage";
 import LoadingSpinner from "./components/LoadingSpinner";
-import { adaptApiResponseArray, type ProjectData } from "./utils/apiAdapter";
+import { adaptApiResponseArray, ProjectData } from "./utils/apiAdapter";
 
 function App() {
 	const [projects, setProjects] = useState<ProjectData[]>([]);
